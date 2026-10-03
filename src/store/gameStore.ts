@@ -1,0 +1,5 @@
+import { create } from 'zustand';
+import type { CarId } from '../config/gameConfig';
+export type Screen = 'menu' | 'select' | 'race' | 'results';
+interface GameState { screen: Screen; selectedCar: CarId; paused: boolean; muted: boolean; speed: number; lap: number; position: number; nos: number; driftScore: number; bestDrift: number; lapTime: number; bestLap: number; loadShedding: boolean; banner: string; setScreen: (s: Screen) => void; setSelectedCar: (c: CarId) => void; setRaceHud: (p: Partial<GameState>) => void; toggleMute: () => void; togglePause: () => void; }
+export const useGameStore = create<GameState>((set) => ({ screen: 'menu', selectedCar: 'royal', paused: false, muted: false, speed: 0, lap: 1, position: 4, nos: 0, driftScore: 0, bestDrift: 0, lapTime: 0, bestLap: 0, loadShedding: false, banner: '', setScreen: (screen) => set({ screen, paused: false }), setSelectedCar: (selectedCar) => set({ selectedCar }), setRaceHud: (p) => set(p), toggleMute: () => set((s) => ({ muted: !s.muted })), togglePause: () => set((s) => ({ paused: !s.paused })) }));
